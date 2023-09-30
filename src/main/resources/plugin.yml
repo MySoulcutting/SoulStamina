@@ -1,0 +1,3 @@
+name: SoulStamina
+version: '${version}'
+main: com.whitesoul.soulstamina.SoulStamina
