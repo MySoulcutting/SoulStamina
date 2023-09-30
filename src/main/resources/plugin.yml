@@ -1,3 +1,10 @@
 name: SoulStamina
 version: '${version}'
 main: com.whitesoul.soulstamina.SoulStamina
+author: WhiteSoul
+depend:
+  - PlaceholderAPI
+  - SoulSQL
+commands:
+  soulstamina:
+    aliases: [sst]
