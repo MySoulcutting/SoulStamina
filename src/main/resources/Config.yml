@@ -1,5 +1,5 @@
 #开关Debug模式 (开发者所用)
-Debug: true
+Debug: false
 #体力恢复时间 (单位:tick)  20tick = 1s
 RecoveryTime: 15
 #体力
@@ -62,9 +62,3 @@ Listener:
     Enable: true
       # 消耗体力
     Value: 1
-#属性
-Attributes:
-  # 增加体力属性
-  addStamina: "体力增加:"
-  # 减少体力属性
-  reduceStamina: "体力减少:"
