@@ -2,10 +2,10 @@ Messages:
   # 冲刺体力不足时
   NoStaminaSprint: "&c你的体力不足，无法冲刺！"
   # 移动不体力足时
-  NoMoveSprint: "&c你的体力不足，无法移动！"
+  NoStaminaMove: "&c你的体力不足，无法移动！"
   # 跳跃体力不足
-  NoJumpSprint: "&c你的体力不足，无法跳跃！"
+  NoStaminaJump: "&c你的体力不足，无法跳跃！"
   # 攻击体力不足
-  NoAttackSprint: "&c你的体力不足，无法攻击！"
+  NoStaminaAttack: "&c你的体力不足，无法攻击！"
   # 游泳体力不足
-  NoSwimSprint: "&c你的体力不足，无法游泳！"
+  NoStaminaSwim: "&c你的体力不足，无法游泳！"

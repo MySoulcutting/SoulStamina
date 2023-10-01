@@ -1,15 +1,12 @@
 package com.whitesoul.soulstamina;
 
-import com.whitesoul.soulsql.SoulSQL;
 import com.whitesoul.soulsql.database.Mysql;
 import com.whitesoul.soulsql.database.SQL;
 import com.whitesoul.soulstamina.command.MainCommand;
 import com.whitesoul.soulstamina.command.MainCommandTab;
-import com.whitesoul.soulstamina.data.StaminaHashMap;
 import com.whitesoul.soulstamina.file.Config;
 import com.whitesoul.soulstamina.file.Messages;
-import com.whitesoul.soulstamina.listener.PlayerJoinListener;
-import com.whitesoul.soulstamina.listener.PlayerQuitListener;
+import com.whitesoul.soulstamina.listener.*;
 import com.whitesoul.soulstamina.papi.SoulStaminaExpansion;
 import com.whitesoul.soulstamina.util.Log;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -35,6 +32,10 @@ public final class SoulStamina extends JavaPlugin {
         // 注册监听器
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
         getServer().getPluginManager().registerEvents(new PlayerQuitListener(), this);
+        getServer().getPluginManager().registerEvents(new PlayerJumpListener(),this);
+        getServer().getPluginManager().registerEvents(new PlayerMoveListener(), this);
+        getServer().getPluginManager().registerEvents(new PlayerSprintListener(), this);
+        getServer().getPluginManager().registerEvents(new PlayerSwimListener(), this);
         // 注册变量
         new SoulStaminaExpansion().register();
         // 初始化数据库

@@ -12,9 +12,8 @@ public class RecoveryStamina {
     public static boolean isRecovery = true;
     // 恢复体力
     public static void recoveryStamina(Player player) {
-        if (!isRecovery) {
-            BukkitScheduler bukkitScheduler = Bukkit.getScheduler();
-            bukkitScheduler.runTaskTimerAsynchronously(SoulStamina.INSTANCE, () -> {
+        if (isRecovery) {
+            Bukkit.getScheduler().runTaskTimerAsynchronously(SoulStamina.INSTANCE, () -> {
                 for (String key : Config.get().getConfigurationSection("Stamina").getKeys(false)) {
                     if (player.hasPermission(Config.get().getString("Stamina." + key + ".Permission"))) {
                         // 获取恢复的值

@@ -1,6 +1,5 @@
 package com.whitesoul.soulstamina.listener;
 
-import com.whitesoul.soulsql.database.Mysql;
 import com.whitesoul.soulsql.database.SQL;
 import com.whitesoul.soulstamina.SoulStamina;
 import com.whitesoul.soulstamina.data.StaminaHashMap;
