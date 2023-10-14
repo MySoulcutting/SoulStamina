@@ -26,15 +26,17 @@ public class PlayerJoinListener implements Listener {
             ResultSet init;
             try {
                 // 查询数据
-                resultSet = SQL.queruy("stamina, maxStamina", "soulstamina", "uuid", uuid.toString());
+                resultSet = SQL.queruy("staminaGroup, stamina, maxStamina", "soulstamina", "uuid", uuid.toString());
                 // 如果没有体力数据
                 while (resultSet.next()) {
                     // 获取数据
+                    String group = resultSet.getString("staminaGroup");
                     int stamina = resultSet.getInt("stamina");
                     int maxStamina = resultSet.getInt("maxStamina");
                     // 插入数据
                     StaminaHashMap.staminaData.put(uuid, stamina);
                     StaminaHashMap.maxStaminaData.put(uuid, maxStamina);
+                    StaminaHashMap.groupData.put(uuid, group);
                 }
                 init = SQL.queruy("uuid", "soulstamina", "uuid", uuid.toString());
                 if (!init.next()) {
@@ -43,17 +45,17 @@ public class PlayerJoinListener implements Listener {
                     // 插入数据
                     StaminaHashMap.staminaData.put(uuid, defaultStamina);
                     StaminaHashMap.maxStaminaData.put(uuid, defaultStamina);
+                    StaminaHashMap.groupData.put(uuid, "Default");
                     // 插入数据到数据库
-                    SQL.insert("soulstamina", new String[]{"uuid", "playerName", "stamina", "maxStamina"}, new String[]{uuid.toString(), playerName, defaultStamina + "", defaultStamina + ""});
+                    SQL.insert("soulstamina", new String[]{"uuid", "playerName", "staminaGroup", "stamina", "maxStamina"}, new String[]{uuid.toString(), playerName, "Default", defaultStamina + "", defaultStamina + ""});
                 }
 
             }catch (Exception e){
                 e.printStackTrace();
                 Log.error("数据库查询失败");
             }
+            RecoveryStamina.isRecovery.put(uuid,true);
+            RecoveryStamina.recoveryStamina(event.getPlayer());
         });
-        Log.debug("玩家数据"+StaminaHashMap.staminaData.get(uuid)+"|"+StaminaHashMap.maxStaminaData.get(uuid));
-        // 恢复体力
-        RecoveryStamina.recoveryStamina(event.getPlayer());
     }
 }

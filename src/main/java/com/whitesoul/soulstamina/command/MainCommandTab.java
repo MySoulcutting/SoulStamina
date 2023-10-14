@@ -1,5 +1,6 @@
 package com.whitesoul.soulstamina.command;
 
+import com.whitesoul.soulstamina.file.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -20,11 +21,14 @@ public class MainCommandTab implements TabCompleter {
             tabCompletions.add("get");
             tabCompletions.add("help");
             tabCompletions.add("reload");
+            tabCompletions.add("changegroup");
         } else if (strings.length == 2) {
             // 全服玩家
             Bukkit.getOnlinePlayers().forEach(player -> tabCompletions.add(player.getName()));
+        } else if (strings.length == 3 && strings[0].equals("changegroup")) {
+            // 配置文件中的组
+            tabCompletions.addAll(Config.get().getConfigurationSection("Stamina").getKeys(false));
         }
         return tabCompletions;
-
     }
 }

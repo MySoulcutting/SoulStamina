@@ -15,23 +15,23 @@ public class PlayerSwimListener implements Listener {
         Player player = event.getPlayer();
         String playerName = event.getPlayer().getName();
         // 移动消耗体力
-        if (player.getLocation().getBlock().isLiquid()){
-            if (Config.get().getBoolean("Listener.Swim.Enable")){
-                // 停止恢复体力
-                RecoveryStamina.isRecovery = false;
+        if (Config.get().getBoolean("Listener.Swim.Enable")) {
+            if (player.getLocation().getBlock().isLiquid()) {
+                RecoveryStamina.isRecovery.put(player.getUniqueId(),false);
                 // 获取移动消耗的体力
                 int moveReduce = Config.get().getInt("Listener.Swim.Value");
                 // 减少体力
                 StaminaAPI.reduceStamina(playerName, moveReduce);
                 // 当体力为0时
-                if (StaminaAPI.getStamina(playerName) == 0){
-                    // 开始恢复体力
-                    RecoveryStamina.isRecovery = true;
+                if (StaminaAPI.getStamina(playerName) == 0) {
                     // 停止移动
                     player.setSprinting(false);
+                    event.setCancelled(true);
                     // 提示
                     player.sendMessage(Messages.get().getString("Messages.NoStaminaSwim").replace("&", "§"));
                 }
+            } else {
+                RecoveryStamina.isRecovery.put(player.getUniqueId(),true);
             }
         }
     }

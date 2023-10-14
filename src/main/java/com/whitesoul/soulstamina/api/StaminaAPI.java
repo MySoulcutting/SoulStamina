@@ -1,7 +1,9 @@
 package com.whitesoul.soulstamina.api;
 
 import com.whitesoul.soulstamina.data.StaminaHashMap;
+import com.whitesoul.soulstamina.event.StaminaGroupChangeEvent;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
@@ -37,8 +39,6 @@ public class StaminaAPI {
     // 重置体力
     public static void resetStamina(String playerName) {
         UUID uuid = Bukkit.getPlayer(playerName).getUniqueId();
-        // 获取玩家当前体力
-        int currentStamina = StaminaHashMap.staminaData.get(uuid);
         // 计算重置后的体力
         int newStamina = StaminaHashMap.maxStaminaData.get(uuid);
         // 更新体力
@@ -65,5 +65,35 @@ public class StaminaAPI {
         }
         // 更新体力
         StaminaHashMap.staminaData.put(uuid, stamina);
+    }
+    // 设置最大体力
+    public static int setMaxStamina(String playerName, int maxStamina) {
+        UUID uuid = Bukkit.getPlayer(playerName).getUniqueId();
+        return StaminaHashMap.maxStaminaData.put(uuid, maxStamina);
+    }
+    // 增加最大体力
+    public static void addMaxStamina(String playerName, int maxStamina) {
+        UUID uuid = Bukkit.getPlayer(playerName).getUniqueId();
+        int oldMaxStamina = StaminaHashMap.maxStaminaData.get(uuid);
+        // 更新体力
+        StaminaHashMap.maxStaminaData.put(uuid, oldMaxStamina + maxStamina);
+    }
+    // 将玩家切换指定组
+    public static void changeGroup(String playerName, String group) {
+        Player player = Bukkit.getPlayer(playerName);
+        UUID uuid = player.getUniqueId();
+        // 更新组
+        StaminaHashMap.groupData.put(uuid, group);
+        // 调用事件
+        StaminaGroupChangeEvent event = new StaminaGroupChangeEvent(player);
+        event.callEvent();
+    }
+    // 获取组
+    public static String getGroup(String playerName) {
+        if (Bukkit.getPlayer(playerName) == null) {
+            return null;
+        }
+        UUID uuid = Bukkit.getPlayer(playerName).getUniqueId();
+        return StaminaHashMap.groupData.get(uuid);
     }
 }

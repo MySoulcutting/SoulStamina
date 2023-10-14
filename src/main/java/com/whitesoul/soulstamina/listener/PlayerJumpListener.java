@@ -15,22 +15,24 @@ public class PlayerJumpListener implements Listener {
         Player player = event.getPlayer();
         String playerName = event.getPlayer().getName();
         // 移动消耗体力
-        if (Config.get().getBoolean("Listener.Jump.Enable")){
-            // 停止恢复体力
-            RecoveryStamina.isRecovery = false;
-            // 获取移动消耗的体力
-            int moveReduce = Config.get().getInt("Listener.Jump.Value");
-            // 减少体力
-            StaminaAPI.reduceStamina(playerName, moveReduce);
-            // 当体力为0时
-            if (StaminaAPI.getStamina(playerName) == 0){
-                // 开始恢复体力
-                RecoveryStamina.isRecovery = true;
-                // 停止移动
-                event.setCancelled(true);
-                // 提示
-                player.sendMessage(Messages.get().getString("Messages.NoStaminaJump").replace("&", "§"));
+        if (Config.get().getBoolean("Listener.Jump.Enable")) {
+            if (event.getTo().distanceSquared(event.getFrom()) == 0) {
+                RecoveryStamina.isRecovery.put(player.getUniqueId(),true);
+                return;
+            }
+
+                RecoveryStamina.isRecovery.put(player.getUniqueId(),false);
+                // 获取移动消耗的体力
+                int moveReduce = Config.get().getInt("Listener.Jump.Value");
+                // 减少体力
+                StaminaAPI.reduceStamina(playerName, moveReduce);
+                // 当体力为0时
+                if (StaminaAPI.getStamina(playerName) == 0) {
+                    // 停止移动
+                    event.setCancelled(true);
+                    // 提示
+                    player.sendMessage(Messages.get().getString("Messages.NoStaminaJump").replace("&", "§"));
+                }
             }
         }
     }
-}

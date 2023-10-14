@@ -1,4 +1,5 @@
 Messages:
+  Prefix: "&6[&b体力值&6]&r"
   # 冲刺体力不足时
   NoStaminaSprint: "&c你的体力不足，无法冲刺！"
   # 移动不体力足时

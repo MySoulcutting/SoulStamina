@@ -1,36 +1,32 @@
 #开关Debug模式 (开发者所用)
 Debug: false
 #体力恢复时间 (单位:tick)  20tick = 1s
-RecoveryTime: 15
+RecoveryTime: 20
 #体力
 Stamina:
   #体力组 (默认组 请勿删除)
   Default:
-    # 玩家初始体力
+    # 玩家最大体力
     Value: 100
     # 玩家体力恢复速度
     Recovery:
       Min: 5
       Max: 10
   VIP:
-    #所需权限
-    Permission: "stamina.vip"
-    # 玩家初始体力
+    # 玩家最大体力
     Value: 300
     # 玩家体力恢复速度
     Recovery:
       Min: 10
       Max: 20
   MVP:
-    #所需权限
-    Permission: "stamina.mvp"
-    # 玩家初始体力
+    # 玩家最大体力
     Value: 500
     # 玩家体力恢复速度
     Recovery:
       Min: 10
       Max: 30
-#事件
+#事件 (需要重启服务器生效)
 Listener:
   # 玩家奔跑时
   Sprint:
@@ -41,17 +37,11 @@ Listener:
   # 玩家移动时
   Move:
       #开关
-    Enable: true
+    Enable: false
       # 消耗体力
     Value: 1
   # 玩家跳跃时
   Jump:
-      #开关
-    Enable: true
-      # 消耗体力
-    Value: 1
-  # 玩家攻击时
-  Attack:
       #开关
     Enable: true
       # 消耗体力

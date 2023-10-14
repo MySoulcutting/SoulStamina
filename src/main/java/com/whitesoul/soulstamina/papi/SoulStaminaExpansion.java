@@ -32,6 +32,9 @@ public class SoulStaminaExpansion extends PlaceholderExpansion {
         if(params.equalsIgnoreCase("max_stamina")){
             return StaminaAPI.getMaxStamina(player.getName()) + "";
         }
+        if (params.equalsIgnoreCase("group")){
+            return StaminaAPI.getGroup(player.getName());
+        }
 
         return null;
     }
