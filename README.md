@@ -28,6 +28,12 @@ V2.0.5 稳定版
 | /soulstamina reset <玩家名>            | 重置玩家体力值 |
 | /soulstamina get <玩家名>              | 获取玩家体力值 |
 | /soulstamina changegroup <玩家名> <组名> | 改变玩家体力组 |
+## 插件变量
+| 变量                        | 说明      |
+|-------------------------------------|---------|
+| %soulstamina_stamina%                  | 当前体力值    |
+| %soulstamina_max_stamina%                | 最大体力值    |
+| %soulstamina_group%         | 当前体力组 |
 ## 插件权限
 | 权限节点              | 说明    |
 |-------------------|-------|
